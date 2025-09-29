@@ -1,0 +1,47 @@
+networks:
+  hydraguide:
+
+services:
+  hydra-migrate:
+    image: oryd/hydra:v2.0.1
+    environment:
+      - DSN=postgres://hydra:secret@postgresd:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+    command: migrate -c /etc/config/hydra/hydra.yml sql -e --yes
+    volumes:
+      - type: bind
+        source: ./hydra.yml
+        target: /etc/config/hydra/hydra.yml
+    restart: on-failure
+    networks:
+      - hydraguide
+    depends_on:
+      - postgresd
+
+  hydra:
+    image: oryd/hydra:v2.0.1
+    ports:
+      - "4444:4444" # Public port
+      - "4445:4445" # Admin port
+    command: serve -c /etc/config/hydra/hydra.yml all --dev
+    volumes:
+      - type: bind
+        source: ./hydra.yml
+        target: /etc/config/hydra/hydra.yml
+    environment:
+      - DSN=postgres://hydra:secret@postgresd:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+    restart: unless-stopped
+    depends_on:
+      - hydra-migrate
+    networks:
+      - hydraguide
+
+  postgresd:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hydra
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=hydra
+    networks:
+      - hydraguide

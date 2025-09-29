@@ -1,0 +1,44 @@
+serve:
+  admin:
+    host: 0.0.0.0
+    port: 4445
+  public:
+    host: 0.0.0.0
+    port: 4444
+    cors:
+      enabled: true
+      allow_credentials: true
+      allowed_origins:
+        - "http://0.0.0.0:4000"  # your client origin
+        - "http://127.0.0.1:4000"
+        - "http://0.0.0.0:3000"  # your login & consent app origin
+        - "http://127.0.0.1:3000"
+      allowed_headers:
+        - "Content-Type"
+        - "Authorization"
+      allowed_methods:
+        - "GET"
+        - "POST"
+        - "OPTIONS"
+
+
+dsn: postgres://hydra:secret@postgresd:5432/hydra?sslmode=disable&max_conns=20&max_idle_conns=4
+
+urls:
+  self:
+    issuer: http://0.0.0.0:4444/
+  consent: http://0.0.0.0:3000/consent
+  login: http://0.0.0.0:3000/login
+
+secrets:
+  system:
+    - youReallyNeedToChangeThis
+
+ttl:
+  access_token: 24h
+  refresh_token: 720h
+  id_token: 1h
+  auth_code: 10m
+
+oauth2:
+  expose_internal_errors: true

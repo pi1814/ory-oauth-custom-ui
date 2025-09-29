@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2 Application Authorization
+  p The application #{client.client_name || 'Unknown Application'} wants to access your account.
+  form(method='post', action=action)
+    input(type='hidden', name='_csrf', value=csrfToken)
+    input(type='hidden', name='challenge', value=challenge)
+    h3 Requested Permissions:
+    each scope in requested_scope
+      .form-group
+        input(type='checkbox', name='grant_scope', value=scope, checked)
+        label= scope
+    .form-group
+      input(type='checkbox', id='remember', name='remember')
+      label(for='remember') Remember this decision
+    button(type='submit', name='submit', value='Allow access') Allow Access
+    button(type='submit', name='submit', value='Deny access') Deny Access

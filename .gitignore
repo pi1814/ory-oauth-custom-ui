@@ -1,0 +1,66 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Coverage directory
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# React specific
+*.tgz
+*.lock
+*.log
+
+# Parcel-bundler cache
+.cache/
+
+# Next.js build output
+.next/
+
+# Svelte build output
+.svelte/
+
+# Storybook build output
+.out/
+
+# Misc
+*.swp
+*.bak
+*.tmp
