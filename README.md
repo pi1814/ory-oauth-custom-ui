@@ -4,6 +4,6 @@ This repository contains a custom UI implementation for OAuth flows using [Ory](
 
 ## Project Structure
 
-- **ory-oauth-app-node**: For backend details and setup instructions, refer to the [ory-oauth-app-node README](../ory-oauth-app-node/README.md).
+- **ory-oauth2-app-node**: For backend details and setup instructions, refer to the [README](../ory-oauth2-app-node/README.md).
 
 Stay tuned for more framework-specific UI projects in this repository.
